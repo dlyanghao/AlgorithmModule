@@ -1,12 +1,43 @@
 package work.yanghao.chainlist;
 
+import com.sun.corba.se.impl.orb.PrefixParserAction;
+
 /**
  * Chain List
  */
 public class ChainList {
 
+    //reverse the chain list
+    //method one (递归法)
+    public static Node reverseChainListByRecursion(Node head){
+        if(null == head || null == head.getNext())
+        {
+            return head;
+        }
+        Node temp = head.getNext();
+        Node newHead = reverseChainListByRecursion(head.getNext());
+        temp.getNext().setNext(head);
+        head.getNext().setNext(null);
+        return newHead;
+    }
 
-    //delete a node from the chain
+    //method two (循环法)
+    public static Node reverseChainListByLoop(Node node){
+
+        Node pre = null;
+        Node next = null;
+        while (node != null) {
+            next = node.getNext();
+            node.getNext().setNext(pre);
+            pre = node;
+            node = next;
+        }
+        return pre;
+
+    }
+
+
+    //XXXX delete a node from the chain
     public static Node deleteNode(Node head, String nodeValue){
 
         //deal the null point head
@@ -14,14 +45,14 @@ public class ChainList {
             return null;
         }
         //find
-        String value = head.getBack().getValue();
+        String value = head.getNext().getValue();
         Node prePoint = head;
-        Node point = head.getBack();
+        Node point = head.getNext();
         while(true){
             if(!nodeValue.equals(value))
             {
                 prePoint = point;
-                Node nextNode = point.getBack();
+                Node nextNode = point.getNext();
                 if(null!=nextNode)
                 {
                     point = nextNode;
@@ -30,8 +61,11 @@ public class ChainList {
             }
             else{
                 //find the destination node,delete the node
-                if(null != point.getBack()){
-                    prePoint.setBack(point);
+                if(null != point.getNext()){
+                    prePoint.setNext(point.getNext());
+                }
+                else{
+                    prePoint.setNext(null);
                 }
                 break;
             }
@@ -62,29 +96,34 @@ public class ChainList {
         childNode7.setValue("?");
 
         //link the child node
-        head.setBack(childNode1);
-        childNode1.setBack(childNode2);
-        childNode2.setBack(childNode3);
-        childNode3.setBack(childNode4);
-        childNode4.setBack(childNode5);
-        childNode5.setBack(childNode6);
-        childNode6.setBack(childNode7);
+        head.setNext(childNode1);
+        childNode1.setNext(childNode2);
+        childNode2.setNext(childNode3);
+        childNode3.setNext(childNode4);
+        childNode4.setNext(childNode5);
+        childNode5.setNext(childNode6);
+        childNode6.setNext(childNode7);
         //return the head
         return head;
     }
 
     public static void main(String[] args) {
         Node chainList = createChainList();
-        Node node = deleteNode(chainList, "?");
-        printChain(node);
+        printChain(chainList);
+        System.out.println("以上是创建的初始链表");
+//        Node node = deleteNode(chainList, "?");
+//        reverseChainListByLoop(chainList);
+        printChain(chainList);
     }
 
     public static void printChain(Node node){
 
-        while(null != node.getBack()){
+        Node temp = node.getNext();
 
-            Node back = node.getBack();
-            System.out.print(back.getValue());
+        while(null!=temp)
+        {
+            System.out.println(temp.getValue());
+            temp = temp.getNext();
         }
     }
 

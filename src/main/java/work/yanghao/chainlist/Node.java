@@ -5,9 +5,9 @@ package work.yanghao.chainlist;
  */
 public class Node {
 
-    private Node pre;
-    private String value;
-    private Node back;
+    private Node pre; //前置节点引用
+    private String value; //节点的值
+    private Node next; //后置节点引用
 
     public Node getPre(){
         return pre;
@@ -25,11 +25,11 @@ public class Node {
         this.value = value;
     }
 
-    public Node getBack(){
-        return back;
+    public Node getNext() {
+        return next;
     }
 
-    public void setBack(Node back) {
-        this.back = back;
+    public void setNext(Node next) {
+        this.next = next;
     }
 }
