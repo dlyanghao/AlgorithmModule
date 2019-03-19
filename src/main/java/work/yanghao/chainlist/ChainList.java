@@ -16,8 +16,9 @@ public class ChainList {
         }
         Node temp = head.getNext();
         Node newHead = reverseChainListByRecursion(head.getNext());
-        temp.getNext().setNext(head);
-        head.getNext().setNext(null);
+
+        temp.setNext(head);
+        head.setNext(null);
         return newHead;
     }
 
@@ -28,7 +29,7 @@ public class ChainList {
         Node next = null;
         while (node != null) {
             next = node.getNext();
-            node.getNext().setNext(pre);
+            node.setNext(pre);
             pre = node;
             node = next;
         }
@@ -87,6 +88,7 @@ public class ChainList {
         Node childNode6 = new Node();
         Node childNode7 = new Node();
         //give the node for value
+        head.setValue("head");
         childNode1.setValue("H");
         childNode2.setValue("e");
         childNode3.setValue("l");
@@ -112,12 +114,14 @@ public class ChainList {
         printChain(chainList);
         System.out.println("以上是创建的初始链表");
 //        Node node = deleteNode(chainList, "?");
-//        reverseChainListByLoop(chainList);
-        printChain(chainList);
+        Node result = reverseChainListByLoop(chainList);
+//        Node result1 = reverseChainListByRecursion(chainList);
+        printChain(result);
     }
 
     public static void printChain(Node node){
 
+        System.out.println(node.getValue());
         Node temp = node.getNext();
 
         while(null!=temp)
