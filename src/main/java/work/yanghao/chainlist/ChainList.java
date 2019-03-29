@@ -34,7 +34,6 @@ public class ChainList {
             node = next;
         }
         return pre;
-
     }
 
 

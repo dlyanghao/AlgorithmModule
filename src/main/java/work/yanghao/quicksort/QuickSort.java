@@ -54,8 +54,9 @@ public class QuickSort {
 
     public static void main(String[] args) {
         int arr[] = {3,9,6,12,69,36,45,28,8,19,52};
+        System.out.println("原数组为："+Arrays.toString(arr));
         quickSort(arr,0,arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        System.out.println("排序后数组为："+Arrays.toString(arr));
     }
 
 

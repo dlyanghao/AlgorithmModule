@@ -10,15 +10,13 @@ public class BinarySearch {
 
     public static int binarySearch(int[] srcArray, int des) {
 
-
-
         //定义初始最小、最大索引
         int low = 0;
         int high = srcArray.length - 1;
         //确保不会出现重复查找，越界
         while (low <= high) {
             //计算出中间索引值
-            int middle = (high + low)>>>1;//防止溢出
+            int middle = (high + low)>>>1;// m
             if (des == srcArray[middle]){
                 return middle;
                 //判断下限
